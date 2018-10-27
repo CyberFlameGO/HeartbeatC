@@ -140,7 +140,7 @@ int light_http1_on_error(http1_parser_s *parser) {
 
 void light_http_on_open(intptr_t uuid, void *udata);
 void light_http_on_data(intptr_t uuid, fio_protocol_s *pr);
-void light_http_on_close(intptr_t uuid, fio_protol_s *pr);
+void light_http_on_close(intptr_t uuid, fio_protocol_s *pr);
 
 void light_http_on_open(intptr_t uuid, void *udata){
     light_http_s *p = malloc(sizeof(*p) + MAX_HTTP_HEADER_LENGTH + MIN_HTTP_READFILE);
