@@ -121,6 +121,7 @@
   <ItemGroup>
     <ClCompile Include="bandwidth_check.c" />
     <ClCompile Include="cli.c" />
+    <ClCompile Include="mongo.c" />
     <ClCompile Include="pcap.c" />
     <ClCompile Include="round_trip_measure.c" />
     <ClCompile Include="secure_socket.c" />

@@ -37,6 +37,9 @@
     <ClCompile Include="cli.c">
       <Filter>Source Files\facil_cli</Filter>
     </ClCompile>
+    <ClCompile Include="mongo.c">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="cli.h">
