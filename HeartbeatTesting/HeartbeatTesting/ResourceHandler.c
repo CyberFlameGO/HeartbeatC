@@ -41,3 +41,11 @@ void calculate_cpu_usage(char *argv[]) {
 	times--;
 	Sleep(lag);
 }
+
+void calculate_ram_usage() {
+	struct rusage r_usage;
+
+	getrusage(RUSAGE_SELF, &r_usage);
+
+	printf("Memory in use: %1d\n", r_usage.ru_maxrss);
+}
