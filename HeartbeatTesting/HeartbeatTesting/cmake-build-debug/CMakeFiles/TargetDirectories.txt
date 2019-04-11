@@ -1,2 +1,0 @@
-F:/C/projects/HeartbeatTesting/HeartbeatTesting/HeartbeatTesting/cmake-build-debug/CMakeFiles/edit_cache.dir
-F:/C/projects/HeartbeatTesting/HeartbeatTesting/HeartbeatTesting/cmake-build-debug/CMakeFiles/rebuild_cache.dir
