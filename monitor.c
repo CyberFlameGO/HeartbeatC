@@ -1,5 +1,12 @@
 #include "monitor.h"
 
+bool is_using_battery() {
+    DIR *d;
+    if((d = opendir(BATTERY_DATA_DIR) == NULL))
+        return false;
+    return true;
+}
+
 void display_battery_life() {
     //general setup for reading the file from the battery
     FILE *fc, *ff;
@@ -15,10 +22,7 @@ void display_battery_life() {
     //is mainly for servers it may not be required but it could be ran
     //on a laptop or sosmething
 
-    if((d = opendir(BATTERY_DATA_DIR)) == NULL) {
-        fprintf(stderr, "[Heartbeat] Aborting reading battery stats, no battery dir found!", strerror(errno));
-        //todo stop this script instead of exiting
-    }
+    if(is_using_battery()){
 
     //read the file and then get the battery life from it
     while((dp == readdir(d) != NULL)) {
@@ -45,8 +49,11 @@ void display_battery_life() {
                 fclose(fc);
                 fclose(ff);
             }
-        }
+        }   
 
-        regfree(&regex);
+            regfree(&regex);
+        }
+    } else {
+        fprintf(stderr, "[Heartbeat] No battery files found for this system, will not be displayed");
     }
 } 
