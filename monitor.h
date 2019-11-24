@@ -1,14 +1,17 @@
 #include<stdio.h>
 #include<string.h>
 #include<errno.h>
-#include<unistd.h>
-#include<regex.h>
-#include<dirent.h>
-#include<linux/limits.h>
 #include<stdbool.h>
 #include<stdlib.h>
 #include<inttypes.h>
 #include<assert.h>
+
+#ifdef linux 
+#include<unistd.h>
+#include<regex.h>
+#include<dirent.h>
+#include<linux/limits.h>
+#endif
 
 #define CPU_DATA_DIR "/proc/stat"
 #define BATTERY_DATA_DIR "sys/class/power_supply"
