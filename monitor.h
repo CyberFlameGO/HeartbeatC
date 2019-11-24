@@ -20,6 +20,5 @@
 //a laptop then it could be somewhat useful
 void display_battery_life();
 bool is_using_battery(); //used to check if the machine has a battery for the above function
-
-//get the cpu load
 void display_cpu_load();
+void display_memory_usage();

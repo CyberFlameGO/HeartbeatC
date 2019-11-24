@@ -82,3 +82,32 @@ void display_cpu_load() {
         }
     }
 }
+
+void display_memory_usage() {
+    FILE * const fp = fopen("/proc/meminfo", "r");
+    int total_memory = 0;
+    int memory_free = 0;
+    int memory_cached = 0;
+
+    if(fp == NULL) {
+        fprintf(stderr, "[Heartbeat] Could not open data file for memory stats", strerror(errno));
+    } else {
+        char buffer[256];
+        while(fgets(buffer, sizeof(buffer), fp)) {
+            int ram_kb;
+            //first one is checked then the others are assigned so that it doesn't get an error
+            if(sscanf(buffer, "MemTotal: %d kB", &ram_kb) == 1) {
+                total_memory = ram_kb / 1024.0;
+                total_memory = total_memory / 1024.0;
+                fprintf(stdout, "[Heartbeat] Total memory: %d\n ", total_memory);
+
+                //assign the memory valuables and such
+                memory_free = sscanf(buffer, "MemFree: %d kB", &ram_kb);
+                memory_cached = sscanf(buffer, "Cached: %d kB", &ram_kb);
+
+                fprintf(stdout, "[Heartbeat] Memory free: %d\n", memory_free);
+                fprintf(stdout, "[Heartbeat] Memory cached: %d\n", memory_cached);
+            }
+        }
+    }
+}
