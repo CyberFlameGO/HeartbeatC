@@ -57,3 +57,28 @@ void display_battery_life() {
         fprintf(stderr, "[Heartbeat] No battery files found for this system, will not be displayed");
     }
 } 
+
+void display_cpu_load() {
+    static long last_user, last_nice, last_sys;
+    static bool first = true;
+    long user, nice, sys;
+    char id[16]; //reads the CPU id
+
+    FILE * const fp = fopen(CPU_DATA_DIR, "r");
+    if(fp == NULL) {
+        fprintf(stderr, "[Heartbeat] Could not open data file for CPU stats", strerror(errno));
+    } else {
+        if(first) {
+            if(fscanf(fp, "%s %ld %ld %ld", id, &last_user, &last_nice, &last_sys) != 4) {
+                fprintf(stderr, "[Heartbeat] Failed to read CPU data dir");
+            } else {
+                first = false;
+                fclose(fp);
+            }
+            fprintf(stdout, "[Heartbeat] CPU load: %sld%%\n", (user + nice + sys) - (last_user + last_nice + last_sys));
+            last_sys = sys;
+            last_user = user;
+            last_nice = nice;
+        }
+    }
+}
